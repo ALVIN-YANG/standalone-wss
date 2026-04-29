@@ -64,7 +64,7 @@ wss.on('connection', (ws, req) => {
     if (role === 'client') {
       const deviceWs = devices.get(deviceId);
       if (deviceWs && deviceWs.readyState === ws.OPEN) {
-        deviceWs.send(data);
+        deviceWs.send(data.toString());
       } else {
         // Device not online
         ws.send(JSON.stringify({ type: 'system', payload: { text: '设备未在线' } }));
@@ -74,7 +74,7 @@ wss.on('connection', (ws, req) => {
       if (clientSet) {
         for (const clientWs of clientSet) {
           if (clientWs.readyState === ws.OPEN) {
-            clientWs.send(data);
+            clientWs.send(data.toString());
           }
         }
       }
